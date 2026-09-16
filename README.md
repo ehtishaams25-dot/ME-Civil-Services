@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# M.E. Civil Services — Website
 
-## Getting Started
+Single-page marketing site for **M.E. Civil Services**, Mumbai — complete plumbing, painting, repair and maintenance.
 
-First, run the development server:
+Built with Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS 4, Motion (Framer Motion),
+Three.js / React Three Fiber / drei, and Lenis smooth scrolling.
+
+## Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build (fully static)
+npm run start      # serve the production build
+npm run lint
+npm run typecheck
+npm run format
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Before going live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Set the domain.** Create `.env.production` with
+   `NEXT_PUBLIC_SITE_URL=https://your-domain.com`. It drives the canonical URL, Open Graph URLs, `sitemap.xml`,
+   `robots.txt` and the structured data. The fallback (`https://www.example.com`) is a placeholder.
+2. **Replace the photography** (see below) with the company's own project photos when available.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where things live
 
-## Learn More
+| Path                     | Purpose                                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| `lib/site.ts`            | Business identity: name, proprietor, phone, address, SEO title/description. Single source of truth. |
+| `lib/content.ts`         | All page copy and service lists (kept verbatim from the brief).                                     |
+| `lib/media.ts`           | Every photograph, with alt text and focal point.                                                    |
+| `lib/structured-data.ts` | `Plumber` / `HousePainter` LocalBusiness JSON-LD — only supplied information.                       |
+| `app/`                   | Layout, page, metadata, icon, OG image, sitemap, robots, manifest.                                  |
+| `components/hero`        | Hero, 3D pipe-junction visual and its SVG fallback drawing.                                         |
+| `components/three`       | The two WebGL scenes and support/visibility hooks.                                                  |
+| `components/sections`    | One component per page section.                                                                     |
+| `components/ui`          | Design-system primitives (Photo, Reveal, SplitLines, Accordion, ItemList, Button…).                 |
 
-To learn more about Next.js, take a look at the following resources:
+## Imagery
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The current photographs are representative editorial images served from Unsplash (free licence, commercial use
+permitted). **They do not show M.E. Civil Services projects.** To use your own:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Put optimised JPG/PNG/WebP files in `public/images/`.
+2. In `lib/media.ts`, change the `src` of the relevant entry to e.g. `"/images/bathroom-01.jpg"` and update `alt`.
 
-## Deploy on Vercel
+Local images are automatically served as AVIF/WebP by `next/image`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 3D and performance
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Two WebGL scenes only: the hero pipe junction (cursor-reactive) and the scroll-driven wall section.
+- Both load via dynamic import after first paint, render only while on screen, and cap device pixel ratio.
+- Phones get a lighter hero model; the wall section is replaced by a static drawing below 768px.
+- Without WebGL, or with Save-Data enabled, both fall back to SVG technical drawings.
+- `prefers-reduced-motion` disables smooth scrolling, parallax and animated reveals.
+
+## Contact form
+
+"Request a Service" composes a text message to the listed phone number (and can copy the details). No data is
+sent to, or stored by, the website. No email address or WhatsApp link has been added because none was supplied.
