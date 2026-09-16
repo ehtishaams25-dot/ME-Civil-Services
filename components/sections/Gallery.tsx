@@ -16,10 +16,10 @@ const layout = [
     ratio: "aspect-[4/5] lg:aspect-auto lg:h-[calc(100%-2.25rem)]",
     depth: 10,
   },
-  { frame: "col-span-4 md:col-span-3 lg:col-span-5", ratio: "aspect-[4/3]", depth: -14 },
-  { frame: "col-span-2 md:col-span-4 lg:col-span-2", ratio: "aspect-[3/4]", depth: 18 },
-  { frame: "col-span-2 md:col-span-4 lg:col-span-3", ratio: "aspect-[3/4] lg:aspect-[4/5]", depth: -8 },
-  { frame: "col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-4", ratio: "aspect-[16/9]", depth: 12 },
+  { frame: "col-span-4 md:col-span-3 lg:col-span-5", ratio: "aspect-[4/5] md:aspect-[4/3]", depth: -14 },
+  { frame: "col-span-2 md:col-span-4 lg:col-span-2", ratio: "aspect-[4/5] md:aspect-[3/4]", depth: 18 },
+  { frame: "col-span-2 md:col-span-4 lg:col-span-3", ratio: "aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5]", depth: -8 },
+  { frame: "col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-4", ratio: "aspect-[4/5] md:aspect-[16/9]", depth: 12 },
 ];
 
 function Drift({
@@ -68,23 +68,23 @@ export function Gallery({ plates }: { plates: readonly Plate[] }) {
         px.set(0);
         py.set(0);
       }}
-      className="mt-[clamp(3.5rem,7vw,6rem)] grid-12 gap-y-[var(--gutter)] lg:grid-rows-[auto_auto_auto]"
+      className="mt-8 grid-12 gap-y-[var(--gutter)] max-md:rail md:mt-[clamp(3.5rem,7vw,6rem)] lg:grid-rows-[auto_auto_auto]"
     >
       {plates.map((plate, i) => {
         const l = layout[i % layout.length];
         return (
-          <figure key={plate.image} className={cn("relative", l.frame)}>
+          <figure key={plate.image} className={cn("relative max-md:w-[72vw] max-md:max-w-[20rem]", l.frame)}>
             <div className={cn("relative overflow-hidden", l.ratio)}>
               <Drift x={x} y={y} depth={l.depth} className="absolute -inset-6">
                 <Photo
                   image={plate.image}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 50vw, (min-width: 768px) 100vw, 72vw"
                   className="h-full w-full"
                   parallax={0}
                 />
               </Drift>
             </div>
-            <figcaption className="mt-3 flex items-baseline justify-between gap-4">
+            <figcaption className="mt-2 flex items-baseline justify-between gap-4 md:mt-3">
               <span className="text-small text-text">{plate.caption}</span>
               <span className="index text-muted">Pl. {String(i + 1).padStart(2, "0")}</span>
             </figcaption>

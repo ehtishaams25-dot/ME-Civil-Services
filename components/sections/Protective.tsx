@@ -8,7 +8,7 @@ export function Protective() {
   return (
     <section id="protective" aria-labelledby="protective-heading" className="relative bg-paper-2">
       <div className="grid lg:grid-cols-2">
-        <div className="relative min-h-[26rem] lg:min-h-full">
+        <div className="relative min-h-[13rem] md:min-h-[26rem] lg:min-h-full">
           <Photo
             image="facadeGrid"
             sizes="(min-width: 1024px) 50vw, 100vw"
@@ -21,21 +21,21 @@ export function Protective() {
           <Reveal>
             <Eyebrow index="11">{protective.eyebrow}</Eyebrow>
           </Reveal>
-          <SplitLines id="protective-heading" lines={protective.heading} className="mt-8 text-h2" />
+          <SplitLines id="protective-heading" lines={protective.heading} className="mt-5 text-h2 md:mt-8" />
 
           <Reveal delay={0.08}>
-            <p className="mt-12 eyebrow text-muted">Applications</p>
+            <p className="mt-6 eyebrow text-muted md:mt-12">Applications</p>
           </Reveal>
-          <Stagger as="ul" stagger={0.05} className="mt-5 flex flex-wrap gap-2">
+          <Stagger as="ul" stagger={0.05} className="mt-3 flex flex-wrap gap-2 md:mt-5">
             {protective.applications.map((a) => (
-              <StaggerItem key={a} className="border border-line-strong px-3.5 py-2 text-small text-text">
+              <StaggerItem key={a} className="border border-line-strong px-3 py-1.5 text-small text-text md:px-3.5 md:py-2">
                 {a}
               </StaggerItem>
             ))}
           </Stagger>
 
-          <Reveal delay={0.1} className="mt-14">
-            <aside aria-label="Important note" className="grid grid-cols-[auto_1fr] gap-5 border-t border-ink pt-6">
+          <Reveal delay={0.1} className="mt-8 md:mt-14">
+            <aside aria-label="Important note" className="grid grid-cols-[auto_1fr] gap-4 border-t border-ink pt-5 md:gap-5 md:pt-6">
               <span
                 aria-hidden
                 className="mt-0.5 flex size-8 items-center justify-center rounded-full border border-brass font-display text-[0.8125rem] text-ink"
@@ -44,7 +44,7 @@ export function Protective() {
               </span>
               <div>
                 <p className="eyebrow text-text">Source before surface</p>
-                <p className="mt-4 max-w-[52ch] text-body text-text">{protective.note}</p>
+                <p className="mt-2 max-w-[52ch] text-body text-text md:mt-4">{protective.note}</p>
               </div>
             </aside>
           </Reveal>

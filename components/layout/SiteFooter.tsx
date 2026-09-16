@@ -1,4 +1,4 @@
-import { Mark } from "@/components/ui/Icons";
+import { Logo } from "@/components/ui/Logo";
 import { nav, site, telHref } from "@/lib/site";
 
 export function SiteFooter() {
@@ -6,24 +6,22 @@ export function SiteFooter() {
   return (
     <footer data-surface="dark" className="relative overflow-hidden bg-ink text-paper">
       <div className="shell">
-        <div className="grid-12 gap-y-12 border-t border-line-dark py-16 md:py-20">
+        <div className="grid-12 gap-y-10 border-t border-line-dark py-12 md:gap-y-12 md:py-20">
           <div className="col-span-4 md:col-span-8 lg:col-span-4">
-            <div className="flex items-center gap-3">
-              <Mark className="size-8" />
-              <span className="font-display text-[0.875rem] font-semibold tracking-[0.14em] uppercase">
-                M.E. Civil Services
-              </span>
-            </div>
-            <p className="mt-6 max-w-[30ch] text-body text-paper/60">{site.positioning}</p>
+            <Logo tone="dark" className="h-11 md:h-14" />
+            <p className="mt-5 max-w-[30ch] text-body text-paper/65 md:mt-6">{site.positioning}</p>
           </div>
 
           <div className="col-span-2 md:col-span-2 lg:col-span-2 lg:col-start-6">
-            <p className="eyebrow text-paper/45">Navigate</p>
-            <ul className="mt-5 grid gap-2.5">
+            <p className="eyebrow text-paper/60">Navigate</p>
+            <ul className="mt-3 grid md:mt-5 md:gap-2.5">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="link-line text-[0.9375rem] text-paper/80 hover:text-paper">
-                    {item.label}
+                  <a
+                    href={item.href}
+                    className="inline-block py-1.5 text-[0.9375rem] text-paper/85 hover:text-paper md:py-0"
+                  >
+                    <span className="link-line">{item.label}</span>
                   </a>
                 </li>
               ))}
@@ -31,17 +29,17 @@ export function SiteFooter() {
           </div>
 
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
-            <p className="eyebrow text-paper/45">Contact</p>
-            <dl className="mt-5 grid gap-5 text-[0.9375rem]">
+            <p className="eyebrow text-paper/60">Contact</p>
+            <dl className="mt-4 grid gap-4 text-[0.9375rem] md:mt-5 md:gap-5">
               <div>
-                <dt className="text-small text-paper/45">Proprietor</dt>
+                <dt className="text-small text-paper/60">Proprietor</dt>
                 <dd className="mt-1 text-paper/85">{site.proprietor}</dd>
               </div>
               <div>
-                <dt className="text-small text-paper/45">Phone</dt>
-                <dd className="mt-1">
-                  <a href={telHref} className="link-line text-paper/85 hover:text-paper">
-                    {site.phone.display}
+                <dt className="text-small text-paper/60">Phone</dt>
+                <dd>
+                  <a href={telHref} className="inline-block py-1.5 text-paper hover:text-paper md:py-0">
+                    <span className="link-line">{site.phone.display}</span>
                   </a>
                 </dd>
               </div>
@@ -49,8 +47,8 @@ export function SiteFooter() {
           </div>
 
           <div className="col-span-4 md:col-span-3 lg:col-span-3 lg:col-start-10">
-            <p className="eyebrow text-paper/45">Address</p>
-            <address className="mt-5 text-[0.9375rem] leading-relaxed text-paper/85 not-italic">
+            <p className="eyebrow text-paper/60">Address</p>
+            <address className="mt-4 text-[0.9375rem] leading-relaxed text-paper/85 not-italic md:mt-5">
               {site.address.lines.map((l) => (
                 <span key={l} className="block">
                   {l}
@@ -61,17 +59,17 @@ export function SiteFooter() {
         </div>
 
         {/* Signature */}
-        <div className="border-t border-line-dark pt-10 pb-8">
-          <p className="font-display text-[clamp(2rem,6.6vw,7rem)] leading-[0.98] font-medium tracking-[-0.045em] text-paper">
+        <div className="border-t border-line-dark pt-8 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:pt-10 md:pb-8">
+          <p className="font-display text-[clamp(1.75rem,6.6vw,7rem)] leading-[1.02] font-medium tracking-[-0.04em] text-paper md:leading-[0.98] md:tracking-[-0.045em]">
             <span className="block">Your Home &amp; Business –</span>
-            <span className="block text-paper/40">Our Responsibility.</span>
+            <span className="block text-paper/45">Our Responsibility.</span>
           </p>
-          <div className="mt-12 flex flex-wrap items-center justify-between gap-4 text-small text-paper/45">
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-small text-paper/60 md:mt-12">
             <p>
               © {year} {site.name}. All rights reserved.
             </p>
-            <a href="#top" className="link-line">
-              Back to top
+            <a href="#top" className="inline-block py-2 md:py-0">
+              <span className="link-line">Back to top</span>
             </a>
           </div>
         </div>

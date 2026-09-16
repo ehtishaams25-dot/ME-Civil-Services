@@ -15,7 +15,7 @@ const SystemScene = dynamic(() => import("@/components/three/SystemScene"), { ss
 export function SystemSection() {
   const track = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
-  const support = useSceneSupport({ mobileFallback: true });
+  const support = useSceneSupport();
   const running = useActiveRender(stage, "200px");
   const near = useActiveRender(track, "100% 0px");
   const [mounted, setMounted] = useState(false);
@@ -55,14 +55,14 @@ export function SystemSection() {
                     <li key={s.key} className="border-b border-line-dark">
                       <div className="grid grid-cols-[3rem_1fr] items-baseline py-4">
                         <span
-                          className={cn("index transition-colors duration-500", on ? "text-brass" : "text-paper/30")}
+                          className={cn("index transition-colors duration-500", on ? "text-brass" : "text-paper/50")}
                         >
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span
                           className={cn(
                             "font-display text-[1.375rem] font-medium tracking-[-0.02em] transition-colors duration-500",
-                            on ? "text-paper" : "text-paper/35",
+                            on ? "text-paper" : "text-paper/50",
                           )}
                         >
                           {s.title}
@@ -84,7 +84,7 @@ export function SystemSection() {
               </ol>
 
               <div aria-hidden className="mt-8 flex items-center gap-4">
-                <span className="index text-paper/40">Scroll</span>
+                <span className="index text-paper/60">Scroll</span>
                 <span className="relative block h-px flex-1 bg-paper/15">
                   <m.span className="absolute inset-0 origin-left bg-brass" style={{ scaleX: bar }} />
                 </span>
@@ -130,7 +130,7 @@ export function SystemSection() {
               </p>
               <div className="pointer-events-none absolute top-0 right-0 flex items-center gap-3">
                 <span className="index text-brass">Fig. 08</span>
-                <span className="eyebrow text-paper/50">Wall section · illustrative</span>
+                <span className="eyebrow text-paper/60">Wall section · illustrative</span>
               </div>
             </div>
           </div>
@@ -142,17 +142,17 @@ export function SystemSection() {
         <Eyebrow index="13" tone="dark">
           System section
         </Eyebrow>
-        <h2 className="mt-8 text-h2">Planning to Finish.</h2>
-        <div className="mt-10">
+        <h2 className="mt-5 text-h2">Planning to Finish.</h2>
+        <div className="mt-6">
           <SystemDrawing />
         </div>
-        <ol className="mt-10 border-t border-line-dark">
+        <ol className="mt-6 border-t border-line-dark">
           {systemStages.map((s, i) => (
-            <li key={s.key} className="grid grid-cols-[2.5rem_1fr] border-b border-line-dark py-5">
-              <span className="pt-1.5 index text-brass">{String(i + 1).padStart(2, "0")}</span>
+            <li key={s.key} className="grid grid-cols-[2.25rem_1fr] border-b border-line-dark py-3.5">
+              <span className="pt-1 index text-brass">{String(i + 1).padStart(2, "0")}</span>
               <div>
-                <p className="font-display text-[1.25rem] font-medium tracking-[-0.02em]">{s.title}</p>
-                <p className="mt-2 text-body text-paper/65">{s.text}</p>
+                <p className="font-display text-[1.1875rem] font-medium tracking-[-0.02em]">{s.title}</p>
+                <p className="mt-1 text-body text-paper/70">{s.text}</p>
               </div>
             </li>
           ))}

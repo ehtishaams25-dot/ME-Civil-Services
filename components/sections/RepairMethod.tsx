@@ -12,16 +12,16 @@ export function RepairMethod({ steps }: { steps: readonly string[] }) {
   const scaleX = useTransform(progress, [0, 1], [0, 1]);
 
   return (
-    <div ref={ref} className="mt-[clamp(5rem,10vw,9rem)]">
-      <div className="flex flex-wrap items-end justify-between gap-6">
+    <div ref={ref} className="mt-12 md:mt-[clamp(5rem,10vw,9rem)]">
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
           <p className="eyebrow text-brass">Repair methodology</p>
-          <h3 className="mt-5 max-w-[22ch] text-h3">From suspected source to final finishing.</h3>
+          <h3 className="mt-3 max-w-[22ch] text-h3 md:mt-5">From suspected source to final finishing.</h3>
         </div>
         <p className="index text-muted-dark">08 steps</p>
       </div>
 
-      <div className="relative mt-12">
+      <div className="relative mt-6 md:mt-12">
         {/* Track */}
         <div aria-hidden className="absolute inset-x-0 top-0 hidden h-px bg-paper/15 lg:block" />
         <m.div
@@ -34,7 +34,7 @@ export function RepairMethod({ steps }: { steps: readonly string[] }) {
           {steps.map((step, i) => (
             <m.li
               key={step}
-              className="relative border-t border-paper/15 pt-6 pb-10 lg:border-t-0 lg:pt-8 lg:pb-0"
+              className="relative border-t border-paper/15 pt-4 pb-5 md:pt-6 md:pb-10 lg:border-t-0 lg:pt-8 lg:pb-0"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
@@ -45,7 +45,7 @@ export function RepairMethod({ steps }: { steps: readonly string[] }) {
                 className="absolute top-0 left-0 hidden size-[7px] -translate-y-[3px] rounded-full border border-brass bg-ink lg:block"
               />
               <span className="index text-brass">{String(i + 1).padStart(2, "0")}</span>
-              <p className="mt-4 font-display text-[1.0625rem] leading-snug font-medium tracking-[-0.01em] text-paper lg:text-[1rem] xl:text-[1.125rem]">
+              <p className="mt-2 font-display text-[1rem] leading-snug md:mt-4 md:text-[1.0625rem] font-medium tracking-[-0.01em] text-paper lg:text-[1rem] xl:text-[1.125rem]">
                 {step}
               </p>
             </m.li>

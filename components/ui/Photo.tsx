@@ -7,7 +7,7 @@ import { media, type MediaKey } from "@/lib/media";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 import { loaderFor } from "@/lib/image-loader";
-import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
+import { useIsPhone, usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 type PhotoProps = {
   image: MediaKey;
@@ -41,11 +41,13 @@ export function Photo({
 }: PhotoProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = usePrefersReducedMotion();
+  // Scroll parallax is skipped on phones: small frames gain little and it costs scroll smoothness.
+  const phone = useIsPhone();
   const item = media[image];
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [`-${parallax}%`, `${parallax}%`]);
-  const moving = parallax > 0 && !reduce;
+  const moving = parallax > 0 && !reduce && !phone;
 
   return (
     <m.div

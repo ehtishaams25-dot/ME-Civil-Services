@@ -23,20 +23,20 @@ function Stage({
   const opacity = useTransform(progress, [at - 0.22, at - 0.04, at + 0.12, at + 0.3], [0.22, 1, 1, 0.45]);
   const x = useTransform(progress, [at - 0.2, at], [16, 0]);
   return (
-    <li className="relative grid grid-cols-[3rem_1fr] items-baseline md:grid-cols-[4.5rem_1fr]">
+    <li className="relative grid grid-cols-[2.5rem_1fr] items-baseline md:grid-cols-[4.5rem_1fr]">
       <span className="relative z-10 index text-muted">
         <span className="bg-paper-2 pr-2">{String(index + 1).padStart(2, "0")}</span>
       </span>
       <m.span
         style={{ opacity, x }}
         className={cn(
-          "block py-3 font-display text-[clamp(1.75rem,4.2vw,4rem)] leading-[1.02] font-medium tracking-[-0.04em] text-ink",
+          "block py-1.5 font-display text-[1.5rem] leading-[1.08] font-medium tracking-[-0.03em] text-ink md:py-3 md:text-[clamp(1.75rem,4.2vw,4rem)] md:leading-[1.02] md:tracking-[-0.04em]",
         )}
       >
         {label}
       </m.span>
       {index < total - 1 ? (
-        <span aria-hidden className="col-start-2 block pb-1 index text-brass">
+        <span aria-hidden className="col-start-2 block index leading-none text-brass md:pb-1">
           ↓
         </span>
       ) : null}
@@ -52,15 +52,15 @@ export function Quality() {
   return (
     <section id="quality" aria-labelledby="quality-heading" className="relative bg-paper-2 section-y">
       <div className="shell">
-        <div className="grid-12 gap-y-14">
+        <div className="grid-12 gap-y-8 md:gap-y-14">
           <div className="col-span-4 md:col-span-8 lg:col-span-4">
             <div className="lg:sticky lg:top-[calc(var(--header-h)+3rem)]">
               <Reveal>
                 <Eyebrow index="17">{quality.eyebrow}</Eyebrow>
               </Reveal>
-              <SplitLines id="quality-heading" lines={["Quality", "Approach"]} className="mt-8 text-h2" />
+              <SplitLines id="quality-heading" lines={["Quality", "Approach"]} className="mt-5 text-h2 md:mt-8" />
               <Reveal delay={0.1}>
-                <p className="mt-10 max-w-[34ch] text-lead text-text">{quality.closing}</p>
+                <p className="mt-4 max-w-[34ch] text-lead text-text md:mt-10">{quality.closing}</p>
               </Reveal>
             </div>
           </div>

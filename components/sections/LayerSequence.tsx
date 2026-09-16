@@ -171,12 +171,12 @@ function SectionCell({ stage }: { stage: number }) {
 
 export function LayerSequence({ steps }: { steps: readonly string[] }) {
   return (
-    <div className="-mx-(--shell-x) mt-12 [scrollbar-width:thin] overflow-x-auto px-(--shell-x) pb-4 lg:mx-0 lg:overflow-visible lg:px-0">
-      <ol className="grid w-max auto-cols-[11.5rem] grid-flow-col gap-x-[var(--gutter)] lg:w-full lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-8">
+    <div className="-mx-(--shell-x) mt-6 snap-x snap-mandatory scroll-px-(--shell-x) [scrollbar-width:thin] overflow-x-auto px-(--shell-x) pb-4 md:mt-12 lg:mx-0 lg:snap-none lg:overflow-visible lg:px-0">
+      <ol className="grid w-max auto-cols-[9.5rem] grid-flow-col gap-x-3 md:auto-cols-[11.5rem] md:gap-x-[var(--gutter)] lg:w-full lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-8">
         {steps.map((step, i) => (
           <m.li
             key={step}
-            className="border-t border-ink pt-4"
+            className="snap-start border-t border-ink pt-3 md:pt-4"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -193,7 +193,7 @@ export function LayerSequence({ steps }: { steps: readonly string[] }) {
             <div className="mt-3 bg-white/60 ring-1 ring-line ring-inset">
               <SectionCell stage={i} />
             </div>
-            <p className="mt-4 font-display text-[0.9375rem] leading-snug font-medium tracking-[-0.01em]">{step}</p>
+            <p className="mt-3 font-display text-[0.9375rem] leading-snug font-medium tracking-[-0.01em] md:mt-4">{step}</p>
           </m.li>
         ))}
       </ol>

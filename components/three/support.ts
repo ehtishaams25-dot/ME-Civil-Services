@@ -22,8 +22,10 @@ export function hasWebGL() {
 /**
  * Decides whether a 3D scene should mount and at what fidelity.
  * `null` while undecided (SSR / first paint) so the static drawing shows.
+ * Phones (< 768px) never mount WebGL — they get pre-rendered or drawn fallbacks,
+ * so Three.js is not downloaded at all.
  */
-export function useSceneSupport(options: { mobileFallback?: boolean } = {}) {
+export function useSceneSupport() {
   const [state, setState] = useState<{ enabled: boolean; quality: Quality; reducedMotion: boolean } | null>(null);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export function useSceneSupport(options: { mobileFallback?: boolean } = {}) {
     const lowCores = (navigator.hardwareConcurrency ?? 8) <= 4;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
 
-    const enabled = hasWebGL() && !saveData && !(options.mobileFallback && small);
+    const enabled = !small && !saveData && hasWebGL();
     const quality: Quality = small || coarse || lowCores ? "low" : "high";
 
     // Defer past first paint so the scene never competes with LCP.
@@ -45,7 +47,7 @@ export function useSceneSupport(options: { mobileFallback?: boolean } = {}) {
       if (hasIdle) window.cancelIdleCallback(handle as number);
       else clearTimeout(handle);
     };
-  }, [options.mobileFallback]);
+  }, []);
 
   return state;
 }

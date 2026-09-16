@@ -46,21 +46,21 @@ export function ServicesIndex() {
       className="relative border-t border-line bg-paper section-y"
     >
       <div className="shell">
-        <div className="grid-12 gap-y-14">
+        <div className="grid-12 gap-y-8 md:gap-y-14">
           <div className="col-span-4 md:col-span-8 lg:col-span-4">
             <div className="lg:sticky lg:top-[calc(var(--header-h)+3rem)]">
               <Reveal>
                 <Eyebrow index="02">Services</Eyebrow>
               </Reveal>
-              <SplitLines id="services-heading" lines={["What We Do"]} className="mt-8 text-h2" />
+              <SplitLines id="services-heading" lines={["What We Do"]} className="mt-5 text-h2 md:mt-8" />
               <Reveal delay={0.1}>
-                <p className="mt-8 max-w-[34ch] text-body text-muted">
+                <p className="mt-4 max-w-[34ch] text-body text-muted md:mt-8">
                   Complete plumbing and painting solutions under one roof — new installations and alterations, repair
                   and leakage rectification, maintenance and finishing works.
                 </p>
               </Reveal>
               <Reveal delay={0.16}>
-                <a href="#categories" className="mt-8 inline-block link-line-reverse text-[0.9375rem] font-medium">
+                <a href="#categories" className="mt-4 inline-block link-line-reverse py-1 text-[0.9375rem] font-medium md:mt-8 md:py-0">
                   View all service categories
                 </a>
               </Reveal>
@@ -89,23 +89,35 @@ export function ServicesIndex() {
                       onPointerEnter={() => setHovered(i)}
                       onFocus={() => setHovered(null)}
                       className={cn(
-                        "group grid grid-cols-[2.25rem_1fr_auto] items-start gap-x-4 py-7 transition-colors duration-500 md:grid-cols-[4rem_minmax(0,1.15fr)_minmax(0,0.85fr)_auto] md:items-center md:py-9",
+                        "group grid grid-cols-[3.5rem_1fr_auto] items-center gap-x-4 gap-y-1 py-4 transition-colors duration-500 md:grid-cols-[4rem_minmax(0,1.15fr)_minmax(0,0.85fr)_auto] md:gap-y-0 md:py-9",
                         hovered !== null && hovered !== i ? "md:text-text/35" : "text-text",
                       )}
                     >
-                      <span className="pt-2 index text-muted md:pt-0">{item.n}</span>
-                      <span className="font-display text-[clamp(1.75rem,3.2vw,3.25rem)] leading-[1.05] font-medium tracking-[-0.035em] transition-transform duration-700 ease-(--ease-expo) group-hover:translate-x-2">
+                      {/* Phones: a small plate stands in for the desktop hover preview. */}
+                      <span className="relative col-start-1 row-span-2 row-start-1 size-14 self-start overflow-hidden bg-ink/10 md:hidden">
+                        <Image
+                          src={media[item.image].src}
+                          alt=""
+                          fill
+                          sizes="56px"
+                          loader={loaderFor(media[item.image].src)}
+                          className="object-cover"
+                          style={{ objectPosition: media[item.image].focus }}
+                        />
+                      </span>
+                      <span className="hidden index text-muted md:inline">{item.n}</span>
+                      <span className="col-start-2 row-start-1 self-end font-display text-[1.375rem] leading-[1.1] font-medium tracking-[-0.025em] transition-transform duration-700 ease-(--ease-expo) group-hover:translate-x-2 md:col-start-auto md:row-start-auto md:self-auto md:text-[clamp(1.75rem,3.2vw,3.25rem)] md:leading-[1.05] md:tracking-[-0.035em]">
                         {item.title}
                       </span>
                       <span
                         className={cn(
-                          "col-start-2 mt-3 max-w-[38ch] text-body transition-colors duration-500 md:col-start-auto md:mt-0",
+                          "col-span-2 col-start-2 row-start-2 max-w-[38ch] text-[0.875rem] leading-[1.5] transition-colors duration-500 md:col-span-1 md:col-start-auto md:row-start-auto md:text-body",
                           hovered !== null && hovered !== i ? "md:text-muted/50" : "text-muted",
                         )}
                       >
                         {item.description}
                       </span>
-                      <span className="col-start-3 row-start-1 flex size-11 items-center justify-center rounded-full border border-line-strong transition-[background-color,border-color,color] duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-paper md:col-start-auto md:row-start-auto">
+                      <span className="col-start-3 row-start-1 flex size-9 items-center justify-center self-end rounded-full border border-line-strong transition-[background-color,border-color,color] duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-paper md:col-start-auto md:row-start-auto md:size-11 md:self-auto">
                         <ArrowUpRight className="size-4 transition-transform duration-500 ease-(--ease-expo) group-hover:rotate-45" />
                       </span>
                     </a>

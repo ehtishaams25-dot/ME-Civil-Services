@@ -48,13 +48,13 @@ export function RequestComposer() {
   };
 
   const field =
-    "w-full border-0 border-b border-line-dark-strong bg-transparent px-0 py-3 text-[0.9375rem] text-paper placeholder:text-paper/35 focus:border-brass focus:ring-0 focus:outline-none";
+    "w-full border-0 border-b border-line-dark-strong bg-transparent px-0 py-3 text-[0.9375rem] text-paper placeholder:text-paper/50 focus:border-brass focus:ring-0 focus:outline-none";
 
   return (
     <div id="request" className="scroll-mt-28 border border-line-dark bg-ink-2/70 p-6 md:p-8">
       <div className="flex items-baseline justify-between gap-4">
         <h3 className="text-h3">Request a Service</h3>
-        <span className="index text-paper/40">Form</span>
+        <span className="index text-paper/60">Form</span>
       </div>
       <p className="mt-3 text-small text-paper/55">
         Select what you need and add a few details. The request opens as a text message to {site.phone.display} —
@@ -174,7 +174,7 @@ export function RequestComposer() {
             </AnimatePresence>
           </button>
         </div>
-        <p className="-mt-3 text-small text-paper/45">
+        <p className="-mt-3 text-small text-paper/60">
           Prefer to talk?{" "}
           <a href={telHref} className="link-line-reverse text-paper/80">
             Call {site.phone.display}

@@ -14,14 +14,14 @@ export function Combined() {
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 hidden guides opacity-40 md:block" />
       <div className="relative shell">
-        <div className="grid-12 gap-y-12">
+        <div className="grid-12 gap-y-5 md:gap-y-12">
           <div className="col-span-4 md:col-span-8 lg:col-span-8">
             <Reveal>
               <Eyebrow index="12" tone="dark">
                 {combined.eyebrow}
               </Eyebrow>
             </Reveal>
-            <SplitLines id="combined-heading" lines={combined.heading} className="mt-8 text-display" />
+            <SplitLines id="combined-heading" lines={combined.heading} className="mt-5 text-h2 md:mt-8 md:text-display" />
           </div>
           <div className="col-span-4 md:col-span-8 lg:col-span-4 lg:self-end">
             <Reveal delay={0.1}>

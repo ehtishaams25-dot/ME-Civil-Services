@@ -28,7 +28,7 @@ export function SystemDrawing({ className }: { className?: string }) {
       {/* Drain */}
       <path d="M230 318 H395 V350 M265 262 V318" stroke="#8b939c" strokeWidth="6" />
       {/* Labels */}
-      <g fill="rgb(245 243 238 / 0.6)" fontFamily="ui-monospace, monospace" fontSize="10" letterSpacing="1">
+      <g fill="rgb(245 243 238 / 0.6)" fontFamily="ui-monospace, monospace" fontSize="15" letterSpacing="1.2">
         <text x="40" y="44">
           FINISH
         </text>

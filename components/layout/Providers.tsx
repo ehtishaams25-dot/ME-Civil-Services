@@ -14,8 +14,11 @@ export function Providers({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce.matches) return;
+    // Smooth wheel scrolling is a desktop refinement. Touch devices keep native
+    // momentum scrolling (Lenis would only add a rAF loop there).
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const touchOnly = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (reduce || touchOnly) return;
 
     const instance = new Lenis({
       autoRaf: true,

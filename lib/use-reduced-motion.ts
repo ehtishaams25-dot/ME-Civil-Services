@@ -2,22 +2,27 @@
 
 import { useSyncExternalStore } from "react";
 
-const QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribe(callback: () => void) {
-  const mq = window.matchMedia(QUERY);
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
+/**
+ * Hydration-safe media query: renders `serverValue` on the server and during
+ * hydration, then follows the real match.
+ */
+export function useMediaQuery(query: string, serverValue = false) {
+  return useSyncExternalStore(
+    (callback) => {
+      const mq = window.matchMedia(query);
+      mq.addEventListener("change", callback);
+      return () => mq.removeEventListener("change", callback);
+    },
+    () => window.matchMedia(query).matches,
+    () => serverValue,
+  );
 }
 
-/**
- * Hydration-safe reduced-motion preference: renders as `false` on the server
- * and during hydration, then updates to the real value.
- */
 export function usePrefersReducedMotion() {
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(QUERY).matches,
-    () => false,
-  );
+  return useMediaQuery("(prefers-reduced-motion: reduce)");
+}
+
+/** Phones: below the `md` breakpoint (48rem). */
+export function useIsPhone() {
+  return useMediaQuery("(max-width: 47.99rem)");
 }

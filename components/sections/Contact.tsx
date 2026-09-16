@@ -48,11 +48,11 @@ export function Contact() {
 
             <Reveal delay={0.24} className="mt-16 grid gap-10 border-t border-line-dark pt-8 sm:grid-cols-2">
               <div>
-                <p className="eyebrow text-paper/50">Proprietor</p>
+                <p className="eyebrow text-paper/60">Proprietor</p>
                 <p className="mt-4 text-h4">{site.proprietor}</p>
               </div>
               <address className="not-italic">
-                <p className="eyebrow text-paper/50">Address</p>
+                <p className="eyebrow text-paper/60">Address</p>
                 <p className="mt-4 text-body text-paper/85">
                   {site.address.lines.map((l) => (
                     <span key={l} className="block">

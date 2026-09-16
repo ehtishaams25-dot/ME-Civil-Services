@@ -17,7 +17,11 @@ const parts: { id: PartId; label: string; note: string }[] = [
   { id: "flange", label: "Flange", note: "Bolted connection" },
 ];
 
-export function HeroVisual() {
+/**
+ * Tablet/desktop: the interactive WebGL model. Phones get `mobileStill`
+ * (a pre-rendered frame of the same model) instead — see Hero.
+ */
+export function HeroVisual({ mobileStill }: { mobileStill?: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const support = useSceneSupport();
   const running = useActiveRender(ref);
@@ -33,11 +37,13 @@ export function HeroVisual() {
         Illustrative model of a plumbing pipe junction: a tee, gate valve, union coupling, elbows and a flanged outlet.
       </p>
 
+      {mobileStill ? <div className="absolute inset-0 md:hidden">{mobileStill}</div> : null}
+
       {/* Static drawing — placeholder and no-WebGL fallback */}
       <div
         aria-hidden
         className={cn(
-          "absolute inset-[8%] transition-opacity duration-[1400ms] ease-(--ease-expo)",
+          "absolute inset-[8%] hidden transition-opacity duration-[1400ms] ease-(--ease-expo) md:block",
           ready ? "opacity-0" : "opacity-100",
         )}
       >
@@ -78,53 +84,55 @@ export function HeroVisual() {
         <span className="absolute right-0 bottom-0 h-px w-3 bg-brass/70" />
       </div>
 
-      <div className="pointer-events-none absolute top-0 left-5 flex items-center gap-3 pt-4 md:left-6">
+      <div className="pointer-events-none absolute top-0 left-4 flex items-center gap-3 pt-3 md:left-6 md:pt-4">
         <span className="index text-brass">Fig. 01</span>
-        <span className="eyebrow text-paper/55">Pipe junction assembly</span>
+        <span className="eyebrow text-paper/60">Pipe junction assembly</span>
       </div>
 
-      {/* Component legend — hover or focus to highlight a part in the model */}
-      <div className="absolute inset-x-0 bottom-0 px-5 pb-5 text-right md:px-6">
-        <p
-          aria-live="polite"
-          className={cn(
-            "mb-4 h-5 text-small text-paper/70 transition-opacity duration-500",
-            current ? "opacity-100" : "opacity-0",
-          )}
-        >
-          {current ? `${current.label} — ${current.note}` : ""}
-        </p>
-        <ul className={cn("hidden flex-wrap justify-end gap-x-6 gap-y-2", support?.enabled && "sm:flex")}>
-          {parts.map((p, i) => (
-            <li key={p.id}>
-              <button
-                type="button"
-                onMouseEnter={() => setActive(p.id)}
-                onMouseLeave={() => setActive(null)}
-                onFocus={() => setActive(p.id)}
-                onBlur={() => setActive(null)}
-                disabled={!ready}
-                className={cn(
-                  "group flex items-center gap-2 py-1 text-[0.75rem] tracking-[0.02em] transition-colors duration-500 disabled:cursor-default",
-                  active === p.id ? "text-paper" : "text-paper/50 hover:text-paper",
-                )}
-              >
-                <span className={cn("index", active === p.id ? "text-brass" : "text-paper/35")}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
+      {/* Component legend — hover or focus to highlight a part in the model (pointer devices) */}
+      {support?.enabled ? (
+        <div className="absolute inset-x-0 bottom-0 hidden px-5 pb-5 text-right md:block md:px-6">
+          <p
+            aria-live="polite"
+            className={cn(
+              "mb-4 h-5 text-small text-paper/70 transition-opacity duration-500",
+              current ? "opacity-100" : "opacity-0",
+            )}
+          >
+            {current ? `${current.label} — ${current.note}` : ""}
+          </p>
+          <ul className="flex flex-wrap justify-end gap-x-6 gap-y-2">
+            {parts.map((p, i) => (
+              <li key={p.id}>
+                <button
+                  type="button"
+                  onMouseEnter={() => setActive(p.id)}
+                  onMouseLeave={() => setActive(null)}
+                  onFocus={() => setActive(p.id)}
+                  onBlur={() => setActive(null)}
+                  disabled={!ready}
                   className={cn(
-                    "border-b pb-0.5 transition-colors duration-500",
-                    active === p.id ? "border-brass" : "border-transparent",
+                    "group flex items-center gap-2 py-1 text-[0.75rem] tracking-[0.02em] transition-colors duration-500 disabled:cursor-default",
+                    active === p.id ? "text-paper" : "text-paper/60 hover:text-paper",
                   )}
                 >
-                  {p.label}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+                  <span className={cn("index", active === p.id ? "text-brass" : "text-paper/55")}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={cn(
+                      "border-b pb-0.5 transition-colors duration-500",
+                      active === p.id ? "border-brass" : "border-transparent",
+                    )}
+                  >
+                    {p.label}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }

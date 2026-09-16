@@ -11,12 +11,12 @@ export function Plumbing() {
     <section id="plumbing" aria-labelledby="plumbing-heading" className="relative bg-paper pb-(--section-y)">
       {/* Chapter opener */}
       <div className="shell">
-        <div className="grid-12 items-end gap-y-12 border-t border-line pt-(--section-y)">
-          <div className="col-span-4 md:col-span-8 lg:col-span-7">
+        <div className="grid-12 items-end gap-y-6 border-t border-line pt-(--section-y) md:gap-y-12">
+          <div className="col-span-4 max-md:order-2 md:col-span-8 lg:col-span-7">
             <Photo
               image="plumbingValves"
               sizes="(min-width: 1024px) 58vw, 100vw"
-              className="aspect-[4/5] md:aspect-[4/3] lg:aspect-[7/6]"
+              className="aspect-[16/10] md:aspect-[4/3] lg:aspect-[7/6]"
               parallax={7}
             />
           </div>
@@ -24,11 +24,11 @@ export function Plumbing() {
             <Reveal>
               <Eyebrow index="03">{plumbing.eyebrow}</Eyebrow>
             </Reveal>
-            <SplitLines id="plumbing-heading" lines={["Complete", "Plumbing Works"]} className="mt-8 text-h2" />
+            <SplitLines id="plumbing-heading" lines={["Complete", "Plumbing Works"]} className="mt-5 text-h2 md:mt-8" />
             <Reveal delay={0.1}>
-              <p className="mt-8 max-w-[36ch] text-lead text-muted">{plumbing.description}</p>
+              <p className="mt-4 max-w-[36ch] text-lead text-muted md:mt-8">{plumbing.description}</p>
             </Reveal>
-            <Reveal delay={0.18} className="mt-12 grid grid-cols-3 border-t border-line-strong">
+            <Reveal delay={0.18} className="mt-12 grid grid-cols-3 border-t border-line-strong max-md:hidden">
               {plumbing.scopes.map((s) => (
                 <div key={s.code} className="border-r border-line pt-5 pr-4 last:border-r-0 [&:not(:first-child)]:pl-4">
                   <p className="index text-muted">{s.code}</p>
@@ -41,12 +41,12 @@ export function Plumbing() {
       </div>
 
       {/* Scope detail — progressive disclosure */}
-      <div className="shell mt-[clamp(4rem,8vw,7rem)]">
+      <div className="shell mt-10 md:mt-[clamp(4rem,8vw,7rem)]">
         <div className="grid-12">
-          <div className="col-span-4 mb-8 md:col-span-8 lg:col-span-3 lg:mb-0">
+          <div className="col-span-4 mb-4 md:col-span-8 md:mb-8 lg:col-span-3 lg:mb-0">
             <Reveal>
               <p className="eyebrow text-muted">Scope of work</p>
-              <p className="mt-5 max-w-[28ch] text-body text-muted">
+              <p className="mt-2 max-w-[28ch] text-body text-muted md:mt-5">
                 Open each group for the full list of plumbing works undertaken.
               </p>
             </Reveal>
@@ -62,11 +62,11 @@ export function Plumbing() {
                   meta={`${String(count).padStart(2, "0")} items`}
                   defaultOpen={i === 0}
                 >
-                  <div className="grid gap-10">
+                  <div className="grid gap-6 md:gap-10">
                     {scope.groups.map((group, gi) => (
                       <div key={gi}>
                         {"label" in group && group.label ? (
-                          <p className="mb-4 eyebrow text-muted">{group.label}</p>
+                          <p className="mb-2 eyebrow text-muted md:mb-4">{group.label}</p>
                         ) : null}
                         <ItemList items={group.items} columns={2} />
                       </div>
@@ -79,8 +79,8 @@ export function Plumbing() {
         </div>
       </div>
 
-      {/* Sanitary plate */}
-      <div className="shell mt-[clamp(4rem,8vw,7rem)]">
+      {/* Sanitary plate (decorative — omitted on phones, the scope above covers it) */}
+      <div className="shell mt-[clamp(4rem,8vw,7rem)] max-md:hidden">
         <div className="grid-12 gap-y-6">
           <div className="col-span-4 md:col-span-4 lg:col-span-4 lg:col-start-5">
             <Photo

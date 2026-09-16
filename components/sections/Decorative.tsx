@@ -8,12 +8,12 @@ export function Decorative() {
   return (
     <section id="finishes" aria-labelledby="finishes-heading" className="relative bg-paper section-y">
       <div className="shell">
-        <div className="grid-12 gap-y-10">
+        <div className="grid-12 gap-y-5 md:gap-y-10">
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <Reveal>
               <Eyebrow index="09">{decorative.eyebrow}</Eyebrow>
             </Reveal>
-            <SplitLines id="finishes-heading" lines={decorative.heading} className="mt-8 text-display" />
+            <SplitLines id="finishes-heading" lines={decorative.heading} className="mt-5 text-h2 md:mt-8 md:text-display" />
           </div>
           <div className="col-span-4 md:col-span-8 lg:col-span-4 lg:col-start-9 lg:self-end">
             <Reveal delay={0.1}>

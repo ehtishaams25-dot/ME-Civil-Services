@@ -52,12 +52,12 @@ export function Scenarios() {
   }
 
   return (
-    <div className="mt-[clamp(3.5rem,7vw,6rem)] pb-(--section-y)">
+    <div className="mt-8 pb-(--section-y) md:mt-[clamp(3.5rem,7vw,6rem)]">
       {/* Tabs */}
       <div
         role="tablist"
         aria-label="Project scenarios"
-        className="grid grid-cols-2 border-t border-line-dark-strong md:grid-cols-4"
+        className="-mx-(--shell-x) flex snap-x gap-2 overflow-x-auto scroll-px-(--shell-x) px-(--shell-x) pb-1 [scrollbar-width:none] md:mx-0 md:grid md:snap-none md:grid-cols-4 md:gap-0 md:overflow-visible md:border-t md:border-line-dark-strong md:px-0 md:pb-0"
         onKeyDown={onKeyDown}
       >
         {combined.scenarios.map((s, i) => {
@@ -75,21 +75,23 @@ export function Scenarios() {
               tabIndex={selected ? 0 : -1}
               onClick={() => setIndex(i)}
               className={cn(
-                "group relative py-5 pr-4 text-left transition-colors duration-500 md:py-6",
-                selected ? "text-paper" : "text-paper/45 hover:text-paper/80",
+                "group relative flex-none snap-start rounded-full border px-4 py-2.5 text-left transition-colors duration-500 md:flex-auto md:rounded-none md:border-0 md:px-0 md:py-6 md:pr-4",
+                selected
+                  ? "border-paper bg-paper text-ink md:bg-transparent md:text-paper"
+                  : "border-line-dark-strong text-paper/75 hover:text-paper/80 md:text-paper/55",
               )}
             >
               <span
                 aria-hidden
                 className={cn(
-                  "absolute inset-x-0 -top-px h-px origin-left bg-brass transition-transform duration-700 ease-(--ease-expo)",
+                  "absolute inset-x-0 -top-px h-px origin-left bg-brass transition-transform duration-700 ease-(--ease-expo) max-md:hidden",
                   selected ? "scale-x-100" : "scale-x-0",
                 )}
               />
-              <span className={cn("block index", selected ? "text-brass" : "text-paper/35")}>
+              <span className={cn("block index max-md:hidden", selected ? "text-brass" : "text-paper/55")}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="mt-3 block font-display text-[clamp(1rem,1.5vw,1.375rem)] leading-tight font-medium tracking-[-0.015em]">
+              <span className="block font-display text-[0.9375rem] leading-tight font-medium tracking-[-0.015em] whitespace-nowrap md:mt-3 md:text-[clamp(1rem,1.5vw,1.375rem)] md:whitespace-normal">
                 {s.title}
               </span>
             </button>
@@ -102,13 +104,13 @@ export function Scenarios() {
         role="tabpanel"
         id={`${baseId}-panel`}
         aria-labelledby={`${baseId}-tab-${scenario.id}`}
-        className="mt-10 border border-line-dark bg-ink-2/60 md:mt-14"
+        className="mt-5 border border-line-dark bg-ink-2/60 md:mt-14"
       >
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line-dark px-5 py-4 md:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-line-dark px-4 py-3 md:px-8 md:py-4">
           <p className="eyebrow text-paper/60">
             <span className="text-brass">Scenario</span> — {scenario.title}
           </p>
-          <p className="index text-paper/40">{String(n).padStart(2, "0")} stages · one service arrangement</p>
+          <p className="index text-paper/60">{String(n).padStart(2, "0")} stages · one service arrangement</p>
         </div>
 
         {/* Desktop: two-lane diagram */}
@@ -194,7 +196,7 @@ export function Scenarios() {
                             step.trade === "plumbing" ? "bottom-6" : "top-6",
                           )}
                         >
-                          <span className="index text-paper/40">{String(i + 1).padStart(2, "0")}</span>
+                          <span className="index text-paper/60">{String(i + 1).padStart(2, "0")}</span>
                           <span className="mt-1.5 font-display text-[0.9375rem] leading-snug font-medium tracking-[-0.01em] text-paper lg:text-[1.0625rem]">
                             {step.label}
                           </span>
@@ -225,19 +227,19 @@ export function Scenarios() {
         <AnimatePresence mode="wait">
           <m.ol
             key={scenario.id}
-            className="relative px-5 py-8 md:hidden"
+            className="relative px-4 py-5 md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
-            <span aria-hidden className="absolute top-10 bottom-10 left-[27px] w-px bg-line-dark-strong" />
+            <span aria-hidden className="absolute top-8 bottom-8 left-[21px] w-px bg-line-dark-strong" />
             {scenario.steps.map((step, i) => (
               <li key={step.label + i}>
                 {i === handover && handover > 0 ? (
-                  <p className="relative my-3 ml-8 eyebrow text-paper/45">Coordinated handover</p>
+                  <p className="relative my-1.5 ml-8 eyebrow text-paper/60">Coordinated handover</p>
                 ) : null}
                 <m.div
-                  className="relative flex items-start gap-5 py-3"
+                  className="relative flex items-start gap-5 py-2"
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, ease: ease.expo, delay: 0.1 + i * 0.08 }}
@@ -250,10 +252,10 @@ export function Scenarios() {
                     )}
                   />
                   <span>
-                    <span className="index text-paper/40">
+                    <span className="index text-paper/60">
                       {String(i + 1).padStart(2, "0")} · {combined.lanes[step.trade]}
                     </span>
-                    <span className="mt-1 block font-display text-[1.125rem] font-medium tracking-[-0.01em]">
+                    <span className="mt-0.5 block font-display text-[1.0625rem] font-medium tracking-[-0.01em]">
                       {step.label}
                     </span>
                   </span>
