@@ -20,11 +20,14 @@ type LogoProps = {
   preload?: boolean;
 };
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export function Logo({ variant = "horizontal", tone = "light", className, alt = "M.E. Civil Services", preload }: LogoProps) {
   const logo = logos[variant];
+  const src = `${basePath}${tone === "dark" ? logo.dark : logo.light}`;
   return (
     <Image
-      src={tone === "dark" ? logo.dark : logo.light}
+      src={src}
       width={logo.w}
       height={logo.h}
       alt={alt}
